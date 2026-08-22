@@ -59,6 +59,7 @@ function NewMatchForm() {
   const [formRankingOptions, setFormRankingOptions] = useState<string[]>([]);
   const [ownRanking, setOwnRanking] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const visibleSetRows = showExtraSets ? setRows : setRows.slice(0, 3);
   const invalidFieldClass = hasSubmitted
     ? "invalid:border-rose-500 invalid:ring-2 invalid:ring-rose-200"
@@ -207,7 +208,9 @@ function NewMatchForm() {
               event.currentTarget
                 .querySelector<HTMLElement>(":invalid")
                 ?.focus();
+              return;
             }
+            setIsSaving(true);
           }}
         >
           <input type="hidden" name="club_id" value={activeClubId} required />
@@ -439,8 +442,13 @@ function NewMatchForm() {
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <Button type="submit" className="gap-2">
-                Opslaan
+              <Button
+                type="submit"
+                className="gap-2"
+                disabled={isSaving}
+                aria-busy={isSaving}
+              >
+                {isSaving ? "Opslaan..." : "Opslaan"}
               </Button>
               <Link
                 href="/"

@@ -33,7 +33,7 @@ export function AppFooter({ className = "" }: { className?: string }) {
         className="inline-flex items-center gap-2 rounded-xl px-3 py-2 font-medium text-[var(--ink)] transition hover:bg-[rgba(10,17,39,0.04)]"
       >
         <Coffee className="h-4 w-4 text-[var(--accent)]" />
-          Vind je TTLog handig? Trakteer Hannah op een koffie
+        Vind je TTLog handig? Trakteer Hannah op een koffie
       </a>
     </footer>
   );

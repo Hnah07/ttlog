@@ -1025,10 +1025,10 @@ export default function Home() {
             </section>
           </div>
 
-              <AppFooter className="lg:hidden" />
+          <AppFooter className="lg:hidden" />
         </div>
 
-          <AppFooter className="mt-8 hidden lg:flex" />
+        <AppFooter className="mt-8 hidden lg:flex" />
       </div>
     </main>
   );
