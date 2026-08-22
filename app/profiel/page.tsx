@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { PendingButton } from "@/components/ui/pending-button";
 import { logout } from "@/app/auth/actions";
 import { claimPerson } from "@/app/profiel/actions";
 import { createClient } from "@/lib/supabase/server";
@@ -142,8 +143,8 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
                             name="person_id"
                             value={person.id}
                           />
-                          <button
-                            type="submit"
+                          <PendingButton
+                            pendingText="Claimen..."
                             className="flex w-full items-center justify-between rounded-2xl border border-[rgba(10,17,39,0.08)] bg-white p-3 text-left transition hover:border-[rgba(4,51,255,0.35)]"
                           >
                             <div>
@@ -157,7 +158,7 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
                               </div>
                             </div>
                             <Badge variant="secondary">Claim</Badge>
-                          </button>
+                          </PendingButton>
                         </form>
                       ))
                     ) : (
@@ -280,13 +281,13 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
                 {user?.email ?? "Geen e-mailadres beschikbaar"}
               </div>
               <form action={logout} className="mt-4">
-                <button
-                  type="submit"
+                <PendingButton
+                  pendingText="Uitloggen..."
                   className="inline-flex items-center gap-2 rounded-xl border border-[rgba(10,17,39,0.12)] bg-white px-3 py-2 text-sm font-medium text-[var(--ink)] transition hover:border-[rgba(10,17,39,0.25)]"
                 >
                   <LogOut className="h-4 w-4" />
                   Uitloggen
-                </button>
+                </PendingButton>
               </form>
             </div>
           </CardContent>

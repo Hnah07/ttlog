@@ -8,6 +8,7 @@ import { AppHeader, AppShell } from "@/components/app-shell";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DateInput } from "@/components/ui/date-input";
+import { PendingButton } from "@/components/ui/pending-button";
 import { updateMatch, deleteMatch } from "@/app/wedstrijden/actions";
 import { createClient } from "@/lib/supabase/client";
 import { formatDateForDisplay } from "@/lib/dates";
@@ -758,12 +759,12 @@ function MatchesPageContent() {
                 >
                   Annuleren
                 </button>
-                <button
-                  type="submit"
+                <PendingButton
+                  pendingText="Opslaan..."
                   className="inline-flex items-center justify-center rounded-xl bg-[var(--accent)] px-3 py-2 text-sm font-medium text-white shadow-[0_12px_24px_rgba(4,51,255,0.22)]"
                 >
                   Opslaan
-                </button>
+                </PendingButton>
               </div>
             </form>
           </div>
@@ -801,12 +802,12 @@ function MatchesPageContent() {
               >
                 Annuleren
               </button>
-              <button
-                type="submit"
+              <PendingButton
+                pendingText="Verwijderen..."
                 className="inline-flex items-center justify-center rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-medium text-rose-700"
               >
                 Verwijderen
-              </button>
+              </PendingButton>
             </form>
           </div>
         </div>
