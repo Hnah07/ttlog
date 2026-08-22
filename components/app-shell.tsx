@@ -150,13 +150,13 @@ export function AppShell({
             </button>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
+          <div className="mt-4 grid gap-0 lg:mt-0 lg:gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
             <aside
               className={`
               min-h-0 overflow-x-hidden rounded-[30px] border border-white/40 bg-[rgba(255,255,255,0.56)] p-5 pb-8 shadow-[0_24px_80px_rgba(10,17,39,0.14)] backdrop-blur-xl transition-all duration-300 ease-out
               ${
                 isMobileOpen
-                  ? "pointer-events-auto max-h-none translate-y-0 opacity-100"
+                  ? "pointer-events-auto mb-6 max-h-none translate-y-0 opacity-100 lg:mb-0"
                   : "pointer-events-none max-h-0 translate-y-2 opacity-0"
               }
               md:block md:max-h-none md:translate-y-0 md:opacity-100 md:pointer-events-auto
