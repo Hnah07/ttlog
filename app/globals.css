@@ -44,6 +44,22 @@ body {
   letter-spacing: -0.02em;
 }
 
+@media (max-width: 767px) {
+  body {
+    background: linear-gradient(
+      155deg,
+      rgba(9, 63, 180, 0.14) 0%,
+      rgba(116, 111, 184, 0.1) 28%,
+      rgba(255, 216, 216, 0.42) 56%,
+      #fff4f1 80%,
+      #fffcfb 100%
+    );
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+}
+
 * {
   box-sizing: border-box;
 }

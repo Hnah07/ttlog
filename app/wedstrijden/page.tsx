@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { ChevronDown, SlidersHorizontal } from "lucide-react";
 
 import { AppHeader, AppShell } from "@/components/app-shell";
 import { Badge } from "@/components/ui/badge";
@@ -67,6 +68,7 @@ function MatchesPageContent() {
   const [selectedSeason, setSelectedSeason] = useState("alle");
   const [selectedResult, setSelectedResult] = useState("alle");
   const [sortBy, setSortBy] = useState("datum-desc");
+  const [areFiltersOpen, setAreFiltersOpen] = useState(false);
 
   useEffect(() => {
     async function loadReferences() {
@@ -235,6 +237,14 @@ function MatchesPageContent() {
     matchedOpponents.find((person) => person.id === opponentId) ??
     matchedOpponents[0] ??
     null;
+  const activeFilterCount = [
+    searchQuery,
+    selectedClub !== "alle" ? selectedClub : "",
+    selectedRanking !== "alle" ? selectedRanking : "",
+    selectedSeason !== "alle" ? selectedSeason : "",
+    selectedResult !== "alle" ? selectedResult : "",
+    sortBy !== "datum-desc" ? sortBy : "",
+  ].filter(Boolean).length;
 
   return (
     <AppShell current="matches">
@@ -261,7 +271,29 @@ function MatchesPageContent() {
               {searchParams.get("error")}
             </div>
           )}
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+          <button
+            type="button"
+            onClick={() => setAreFiltersOpen((value) => !value)}
+            className="flex w-full items-center justify-between rounded-xl border border-[rgba(22,20,31,0.08)] bg-white px-3 py-2.5 text-left text-sm font-medium text-[var(--ink)] md:hidden"
+            aria-expanded={areFiltersOpen}
+          >
+            <span className="flex items-center gap-2">
+              <SlidersHorizontal className="h-4 w-4 text-[var(--accent)]" />
+              Filters en sortering
+              {activeFilterCount > 0 && (
+                <span className="rounded-full bg-[var(--accent)] px-2 py-0.5 text-xs text-white">
+                  {activeFilterCount}
+                </span>
+              )}
+            </span>
+            <ChevronDown
+              className={`h-4 w-4 transition-transform ${areFiltersOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+
+          <div
+            className={`${areFiltersOpen ? "grid" : "hidden"} gap-3 md:grid md:grid-cols-2 xl:grid-cols-5`}
+          >
             <div className="space-y-2 md:col-span-2 xl:col-span-2">
               <label className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
                 Zoeken
