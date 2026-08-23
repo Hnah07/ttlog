@@ -8,6 +8,8 @@ import { ArrowRight, Coffee, LogOut, Menu, Plus, X } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { ClaimReminder } from "@/components/claim-reminder";
+import { PendingButton } from "@/components/ui/pending-button";
+import { logout } from "@/app/auth/actions";
 import { createClient } from "@/lib/supabase/client";
 
 const navItems = [
@@ -233,16 +235,18 @@ export function AppShell({
                 )}
               </div>
 
-              <Link
-                href="/login"
-                onClick={() => setIsMobileOpen(false)}
-                className="mt-10 flex h-11 w-full items-center justify-between rounded-xl px-4 py-2 text-sm font-medium text-[var(--ink)] transition hover:bg-[rgba(22,20,31,0.04)]"
-              >
-                <span className="flex items-center gap-2">
-                  <LogOut className="h-4 w-4" />
-                  Uitloggen
-                </span>
-              </Link>
+              <form action={logout} className="mt-10">
+                <PendingButton
+                  pendingText="Uitloggen..."
+                  onClick={() => setIsMobileOpen(false)}
+                  className="flex h-11 w-full items-center justify-between rounded-xl px-4 py-2 text-sm font-medium text-[var(--ink)] transition hover:bg-[rgba(22,20,31,0.04)]"
+                >
+                  <span className="flex items-center gap-2">
+                    <LogOut className="h-4 w-4" />
+                    Uitloggen
+                  </span>
+                </PendingButton>
+              </form>
             </aside>
 
             <div className="space-y-6">
