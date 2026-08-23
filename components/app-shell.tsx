@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState, type ReactNode } from "react";
 import { useEffect } from "react";
 import { ArrowRight, Coffee, LogOut, Menu, Plus, X } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { ClaimReminder } from "@/components/claim-reminder";
-import { PendingButton } from "@/components/ui/pending-button";
-import { logout } from "@/app/auth/actions";
 import { createClient } from "@/lib/supabase/client";
 
 const navItems = [
@@ -49,6 +48,8 @@ export function AppShell({
   current: "dashboard" | "new-match" | "matches" | "stats" | "profile";
 }) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const router = useRouter();
   const [profileStatus, setProfileStatus] = useState<{
     naam: string;
     club: string;
@@ -113,6 +114,14 @@ export function AppShell({
           : current === "stats"
             ? "Statistieken"
             : "Profiel";
+
+  const handleLogout = async () => {
+    if (isLoggingOut) return;
+
+    setIsLoggingOut(true);
+    await supabase.auth.signOut();
+    router.replace("/login");
+  };
 
   return (
     <>
@@ -235,18 +244,20 @@ export function AppShell({
                 )}
               </div>
 
-              <form action={logout} className="mt-10">
-                <PendingButton
-                  pendingText="Uitloggen..."
-                  onClick={() => setIsMobileOpen(false)}
-                  className="flex h-11 w-full items-center justify-between rounded-xl px-4 py-2 text-sm font-medium text-[var(--ink)] transition hover:bg-[rgba(22,20,31,0.04)]"
-                >
-                  <span className="flex items-center gap-2">
-                    <LogOut className="h-4 w-4" />
-                    Uitloggen
-                  </span>
-                </PendingButton>
-              </form>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileOpen(false);
+                  void handleLogout();
+                }}
+                disabled={isLoggingOut}
+                className="mt-10 flex h-11 w-full items-center justify-between rounded-xl px-4 py-2 text-sm font-medium text-[var(--ink)] transition hover:bg-[rgba(22,20,31,0.04)] disabled:pointer-events-none disabled:opacity-50"
+              >
+                <span className="flex items-center gap-2">
+                  <LogOut className="h-4 w-4" />
+                  {isLoggingOut ? "Uitloggen..." : "Uitloggen"}
+                </span>
+              </button>
             </aside>
 
             <div className="space-y-6">
