@@ -44,6 +44,44 @@ body {
   letter-spacing: -0.02em;
 }
 
+.pwa-splash {
+  display: none;
+}
+
+@media (display-mode: standalone), (-webkit-display-mode: standalone) {
+  .pwa-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+
+  .pwa-splash-visible {
+    display: flex;
+    animation: pwa-splash-fade 700ms ease forwards;
+  }
+}
+
+@keyframes pwa-splash-fade {
+  0%,
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
 @media (max-width: 767px) {
   body {
     background: linear-gradient(
