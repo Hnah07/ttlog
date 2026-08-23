@@ -12,7 +12,7 @@ import { PendingButton } from "@/components/ui/pending-button";
 import { logout } from "@/app/auth/actions";
 import { claimPerson } from "@/app/profiel/actions";
 import { createClient } from "@/lib/supabase/server";
-import { BadgeCheck, ExternalLink, LogOut, Mail } from "lucide-react";
+import { BadgeCheck, ExternalLink, Mail } from "lucide-react";
 
 type ProfilePageProps = {
   searchParams: Promise<{ error?: string; message?: string; q?: string }>;
@@ -285,7 +285,6 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
                   pendingText="Uitloggen..."
                   className="inline-flex items-center gap-2 rounded-xl border border-[rgba(10,17,39,0.12)] bg-white px-3 py-2 text-sm font-medium text-[var(--ink)] transition hover:border-[rgba(10,17,39,0.25)]"
                 >
-                  <LogOut className="h-4 w-4" />
                   Uitloggen
                 </PendingButton>
               </form>
